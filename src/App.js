@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import "./App.css";
+import Header from "./Components/Header";
+import Body from "./Components/Body";
+import { createBrowserRouter } from "react-router-dom";
+import About from "./Components/About";
+import Error from "./Components/Error";
+import Contact from "./Components/Contact";
+import { Outlet } from "react-router-dom";
+import RestaurantMenu from "./Components/RestaurantMenu";
+import { Provider } from "react-redux";
+import store from "./Utils/Store";
+function AppLayout() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <Provider store = {store}>  
+      <Header />
+    <Outlet/> 
+    </Provider>
   );
 }
 
-export default App;
+export const appRouter = createBrowserRouter([
+  // THIS ARRAY IS A LIST OF PATHS
+  {
+    path: "/",
+    element: <AppLayout />,
+    errorElement: <Error />,
+    children:[
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+      path: "/about",
+      element: <About />,
+    },
+    {
+      path: "/contact",
+      element: <Contact />,
+    },
+    {
+      path: "/restaurant/:resid",
+      element: <RestaurantMenu />,
+    },
+  ]
+      
+    
+  },
+  
+]);
+export default AppLayout;
