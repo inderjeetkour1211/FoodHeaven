@@ -9,7 +9,7 @@ const cartItems = useSelector(store => store.cart.items);
     <div className="flex justify-between items-center bg-gray-800 p-4 text-white">
       {/* logo */}
       <div className="w-16">
-        <img src={AppLogo} alt="FoodHeaven Logo" />
+       <Link to ={"/"}> <img src={AppLogo} alt="FoodHeaven Logo" /></Link>
       </div>
 
       {/* navbar */}
@@ -18,7 +18,7 @@ const cartItems = useSelector(store => store.cart.items);
         <li className="cursor-pointer hover:text-gray-200"><Link to={"/"}>Home</Link></li>
           <li className="cursor-pointer hover:text-gray-200"><Link to={"/about"}>About</Link></li>
           <li className="cursor-pointer hover:text-gray-200"><Link to={"/contact"}>Contact Us</Link></li>
-          <li className="cursor-pointer hover:text-gray-200">Cart {cartItems.length}</li>
+          <li className="cursor-pointer hover:text-gray-200"><Link to={"/cart"}>Cart {cartItems.length}</Link></li>
         </ul>
       </div>
     </div>

@@ -17,8 +17,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [dataNotFound, setDataNotFound] = useState(false); // State variable to track if data is not found
-
+  const [dataNotFound, setDataNotFound] = useState(false);
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -26,26 +25,23 @@ const Body = () => {
   async function getRestaurants() {
     const data = await fetch(swiggy_api_URL);
     const json = await data.json();
-    const restaurantData = json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
-      (restaurant) => restaurant.info
-    );
+    const restaurantData =
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants?.map(
+        (restaurant) => restaurant.info
+      );
     setAllRestaurants(restaurantData);
-    setFilteredRestaurants(restaurantData); // Initialize filteredRestaurants with all restaurants
+    setFilteredRestaurants(restaurantData);
   }
 
   const handleSearch = () => {
-    // Filter the data based on the search text
     const data = filterData(searchText, allRestaurants);
 
-    // Update the state of restaurants list
     setFilteredRestaurants(data);
 
-    // Check if filtered data is empty
     setDataNotFound(data?.length === 0);
   };
 
   const handleKeyDown = (e) => {
-    // Check if the Enter key is pressed (keyCode 13)
     if (e.key === "Enter") {
       handleSearch();
     }
@@ -67,24 +63,24 @@ const Body = () => {
           onClick={handleSearch}
         >
           Search
-        </button> 
+        </button>
       </div>
 
       <div className="flex flex-wrap justify-center mt-4">
-        {/* Conditional rendering for data availability */}
         {dataNotFound ? (
           <h1>Sorry, No match found for {searchText}</h1>
         ) : allRestaurants?.length === 0 ? (
           <Shimmer />
-        ) : filteredRestaurants ? ( // Check if filteredRestaurants is defined before rendering
+        ) : filteredRestaurants ? (
           filteredRestaurants.map((restaurant) => (
-            <div className="w-80 p-4 mx-4 my-2" >
-              <Link to ={"/restaurant/"+ restaurant?.id }><RestaurantCard {...restaurant} key={restaurant?.id} /></Link>
+            <div className="w-80 p-4 mx-4 my-2 transform transition-transform hover:scale-110">
+              <Link to={"/restaurant/" + restaurant?.id}>
+                <RestaurantCard {...restaurant} key={restaurant?.id} />
+              </Link>
             </div>
           ))
         ) : (
-          // Display a loading state if filteredRestaurants is not available yet
-          <h1>Loading...</h1>
+          <Shimmer/>
         )}
       </div>
     </>
