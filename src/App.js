@@ -10,11 +10,13 @@ import RestaurantMenu from "./Components/RestaurantMenu";
 import { Provider } from "react-redux";
 import store from "./Utils/Store";
 import Cart from "./Components/Cart";
+import Footer from "./Components/Footer";
 function AppLayout() {
   return (
    <Provider store = {store}>  
       <Header />
     <Outlet/> 
+    <Footer/>
     </Provider>
   );
 }
