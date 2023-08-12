@@ -15,15 +15,12 @@ const Cart = () => {
             : `Number of Items in the cart, ${cartItems.length}`}
         </span>
       </h1>
-      <div className="flex flex-wrap">
-        <div className=" mt-14 w-2/3">
-          {cartItems.map((item) => (
-            <FoodItem key={item.id} {...item} />
-          ))}
-        </div>
-        <div>
-          <p>Total Price: &#8377;{totalPrice / 100}</p>
-        </div>
+
+      <div className=" mt-14 w-2/3">
+        {cartItems.map((item) => (
+          <FoodItem key={item.id} {...item} />
+        ))}
+        <p>Total Price: &#8377;{totalPrice / 100}</p>
       </div>
     </div>
   );
