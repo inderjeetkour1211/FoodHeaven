@@ -52,7 +52,7 @@ const Body = () => {
   
 
   return (
-    <div className=" max-w-[1240px] mx-auto" >
+    <div className=" max-w-[1240px] mx-auto mb-10" >
       <div className="search flex items-center justify-center mt-4">
         <input
           type="text"

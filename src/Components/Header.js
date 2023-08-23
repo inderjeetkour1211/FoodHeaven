@@ -4,12 +4,21 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import useOnline from "../Utils/useOnline";
+
 const Header = () => {
   const [toggle, setToggle] = useState(false);
   const cartItems = useSelector((store) => store.cart.items);
   const online = useOnline(true);
+
+  // Function to handle link click on small devices
+  const handleLinkClick = () => {
+    if (toggle) {
+      setToggle(false);
+    }
+  };
+
   return (
-    <div className="w-full bg-gray-800 relative"> {/* Added relative positioning */}
+    <div className="w-full bg-gray-800 relative">
       <div className="flex max-w-[1240px] mx-auto  md:flex-row justify-between items-center  p-4 text-white">
         {/* Logo */}
         <div className="w-20 mb-4 md:mb-0 md:w-16">
@@ -21,55 +30,70 @@ const Header = () => {
         {/* Navbar */}
         <div>
           {toggle ? (
-          
             <AiOutlineClose
               onClick={() => setToggle(!toggle)}
               className="md:hidden block text-3xl"
             />
           ) : (
             <AiOutlineMenu
-            onClick={() => setToggle(!toggle)}
-            className="md:hidden block text-3xl"
-          /> 
+              onClick={() => setToggle(!toggle)}
+              className="md:hidden block text-3xl"
+            />
           )}
           <ul className="hidden md:flex gap-10">
             <li className="cursor-pointer hover:text-gray-200 mb-2 md:mb-0">
-              <Link to={"/"}>Home</Link>
+              <Link to={"/"} onClick={handleLinkClick}>
+                Home
+              </Link>
             </li>
             <li className="cursor-pointer hover:text-gray-200 mb-2 md:mb-0">
-              <Link to={"/about"}>About</Link>
+              <Link to={"/about"} onClick={handleLinkClick}>
+                About
+              </Link>
             </li>
             <li className="cursor-pointer hover:text-gray-200">
-              <Link to={"/cart"}>Cart {cartItems.length}</Link>
-            </li> 
+              <Link to={"/cart"} onClick={handleLinkClick}>
+                Cart {cartItems.length}
+              </Link>
+            </li>
             <li>
-             {
-              online ? (<h2 className="text-md"> 🟢 Online</h2>) : (<h2 className=" text-md"> 🔴Offline</h2>)
-             }
+              {online ? (
+                <h2 className="text-md"> 🟢 Online</h2>
+              ) : (
+                <h2 className=" text-md"> 🔴Offline</h2>
+              )}
             </li>
           </ul>
+
           {/* Mobile responsive menu */}
           <ul
             className={`md:hidden p-4 absolute bg-gray-800 w-full h-screen top-[100px]  ${
-              toggle ? "left-0" :  "-left-full"   // Adjust positioning
+              toggle ? "left-0" : "-left-full"
             }`}
-            style={{ zIndex: toggle ? 10 : -1}} // Added z-index
-          > 
-           <li>
-             {
-              online ? (<h2 className="text-md"> 🟢 Online</h2>) : (<h2 className=" text-md"> 🔴Offline</h2>)
-             }
+            style={{ zIndex: toggle ? 10 : -1 }}
+          >
+            <li>
+              {online ? (
+                <h2 className="text-md"> 🟢 Online</h2>
+              ) : (
+                <h2 className=" text-md"> 🔴Offline</h2>
+              )}
             </li>
-            <li className="cursor-pointer hover:text-gray-200 pt-5" >
-              <Link to={"/"}>Home</Link>
+            <li className="cursor-pointer hover:text-gray-200 pt-5">
+              <Link to={"/"} onClick={handleLinkClick}>
+                Home
+              </Link>
             </li>
-            <li className="cursor-pointer hover:text-gray-200 pt-5" >
-              <Link to={"/about"}>About</Link>
+            <li className="cursor-pointer hover:text-gray-200 pt-5">
+              <Link to={"/about"} onClick={handleLinkClick}>
+                About
+              </Link>
             </li>
-            <li className="cursor-pointer hover:text-gray-200 pt-5" >
-              <Link to={"/cart"}>Cart {cartItems.length}</Link>
-            </li> 
-           
+            <li className="cursor-pointer hover:text-gray-200 pt-5">
+              <Link to={"/cart"} onClick={handleLinkClick}>
+                Cart {cartItems.length}
+              </Link>
+            </li>
           </ul>
         </div>
       </div>

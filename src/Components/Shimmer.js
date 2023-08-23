@@ -1,6 +1,6 @@
 const Shimmer = () => {
   return (
-    <div className="flex max-w-[1240px] mx-auto flex-wrap justify-center mt-16">
+    <div className="flex max-w-[1240px] mx-auto flex-wrap justify-center mt-16 mb-12">
       {Array(12)
         .fill("")
         .map((e, index) => (
