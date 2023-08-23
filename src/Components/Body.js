@@ -3,6 +3,8 @@ import RestaurantCard from "./RestaurantCard";
 import { swiggy_api_URL } from "./constant";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+
+
 function filterData(searchText, allRestaurants) {
   const filteredData = allRestaurants.filter((restaurant) => {
     return restaurant?.name
@@ -18,6 +20,7 @@ const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [dataNotFound, setDataNotFound] = useState(false);
+ 
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -46,9 +49,10 @@ const Body = () => {
       handleSearch();
     }
   };
+  
 
   return (
-    <>
+    <div className=" max-w-[1240px] mx-auto" >
       <div className="search flex items-center justify-center mt-4">
         <input
           type="text"
@@ -73,17 +77,17 @@ const Body = () => {
           <Shimmer />
         ) : filteredRestaurants ? (
           filteredRestaurants.map((restaurant) => (
-            <div className="w-80 p-4 mx-4 my-2 transform transition-transform hover:scale-110">
+            <div className="w-full md:w-1/3 p-4 gap-6 my-2 transform transition-transform hover:scale-110">
               <Link to={"/restaurant/" + restaurant?.id}>
                 <RestaurantCard {...restaurant} key={restaurant?.id} />
               </Link>
             </div>
           ))
         ) : (
-          <Shimmer/>
+          <Shimmer />
         )}
       </div>
-    </>
+    </div>
   );
 };
 

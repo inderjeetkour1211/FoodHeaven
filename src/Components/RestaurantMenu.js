@@ -4,6 +4,7 @@ import { IMG_CDN_URL, swiggy_MENU_API } from "./constant";
 import Shimmer from "./Shimmer";
 import { addItem } from "../Utils/CartSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const RestaurantMenu = () => {
   const { resid } = useParams();
@@ -29,7 +30,7 @@ const RestaurantMenu = () => {
         .groupedCard?.cardGroupMap?.REGULAR?.cards?.find(
           (card) =>
             card?.card?.card["@type"] ===
-            "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" &&
+              "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory" &&
             card?.card?.card?.title === "Recommended"
         )
         ?.card?.card.itemCards?.map((itermCard) => itermCard?.card?.info) || [];
@@ -40,11 +41,12 @@ const RestaurantMenu = () => {
     dispatch(addItem(menuItems));
   };
 
-  return !restaurant ? (
-    <Shimmer />
-  ) : (
-    <div className="w-full mx-auto p-4 md:w-3/4 lg:w-1/2 xl:w-2/3 2xl:w-1/2">
+  return restaurant === null || menuList.length === 0 ? ( 
+  <Shimmer />
+) : (
+    <div className=" max-w-[1240px] w-full mx-auto p-4 md:w-3/4 lg:w-1/2 xl:w-2/3 2xl:w-1/2">
       <div>
+        <h2> <Link to={"/"}>Go back to the main menu 🔙</Link></h2>
         <img
           className="w-48 mx-auto mb-4"
           src={IMG_CDN_URL + restaurant?.cloudinaryImageId}

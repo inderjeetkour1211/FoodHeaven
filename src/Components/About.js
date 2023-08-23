@@ -2,7 +2,7 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div className="bg-gray-100 py-8 px-4 md:px-8 lg:px-16">
+    <div className="bg-gray-100 max-w-[1240px] mx-auto py-8 px-4 md:px-8 lg:px-16">
       <h1 className="text-3xl font-bold mb-4">About Us</h1>
       <p className="text-gray-700 mb-4">
         Our mission is to make it easy for people to order food from their favorite restaurants. We believe that everyone should have access to delicious, affordable food, no matter where they live or work.

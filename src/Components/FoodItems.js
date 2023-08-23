@@ -2,10 +2,10 @@ import React from "react";
 import { IMG_CDN_URL } from "../Utils/Constant";
 const FoodItem = ({ name, price, imageId }) => {
   return (
-    <div className=" w-1/3">
-      <div className=" ">
+    <div className=" w-1/3 mx-auto md:mx-0">
+      <div className="items-center ">
         <img
-          className="w-24 rounded-2xl "
+          className="w-[400px] rounded-2xl items-center mx-auto "
           src={IMG_CDN_URL + imageId}
           alt="restaurantImages"
         />
